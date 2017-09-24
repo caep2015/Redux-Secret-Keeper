@@ -5,6 +5,7 @@ export const SET_TOKEN = 'SET_TOKEN';
 export const SET_USER = 'SET_USER';
 export const SET_ERROR = 'SET_ERROR';
 export const INCR_LOADING = 'INCR_LOADING';
+export const LOG_OUT = 'LOG_OUT';
 
 const makeActionCreator = function(actionType) {
     return function(payload) {
@@ -16,6 +17,7 @@ const setToken = makeActionCreator(SET_TOKEN);
 const setUser = makeActionCreator(SET_USER);
 const incrLoading = makeActionCreator(INCR_LOADING);
 const setError = makeActionCreator(SET_ERROR);
+const logOut = makeActionCreator(LOG_OUT);
 
 const baseURL = "https://user-auth-test.herokuapp.com";
 const api = (path) => baseURL + path;
@@ -84,7 +86,6 @@ export const login = (email, password, callback) => {
 const getDashboard = (token) => {
     return (dispatch, getState) => {
         token = token || getState().token;
-
         if (!token) {
             return;
         }
@@ -99,5 +100,16 @@ const getDashboard = (token) => {
                 dispatch(setUser({email: res.body.email, 'full_name': res.body.full_name, message: res.body.message}))
                 dispatch(incrLoading(-1));
             })
+    }
+}
+
+export const userLogOut = () => {
+  return (dispatch) => {
+    const token = Cookies.get('token');
+      if (token) {
+        dispatch(setToken(token));
+        dispatch(getDashboard());
+        console.log(token);
+      }
     }
 }

@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom';
+import { userLogOut } from '../actions/index';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-export default class NavLayout extends Component {
+class NavLayout extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleLogOut = this.handleLogOut.bind(this);
+  }
+
+  handleLogOut = (event) => {
+    this.props.userLogOut();
+    this.props.history.push('/');
+  };
+
   render() {
     return (
       <div>
@@ -26,3 +40,13 @@ export default class NavLayout extends Component {
     );
   }
 }
+
+const mapDispatchToProps = function(dispatch) {
+  return {
+    userLogOut: function() {
+      dispatch(userLogOut());
+    }
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(NavLayout));
