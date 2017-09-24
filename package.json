@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
     "immutability-helper": "^2.4.0",
     "js-cookie": "^2.1.4",
     "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.13",
+    "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
+    "redux-form": "^7.0.4",
     "redux-thunk": "^2.2.0",
     "superagent": "^3.6.0"
   },
@@ -19,5 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "^1.0.13"
   }
 }
